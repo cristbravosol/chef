@@ -1,0 +1,48 @@
+---
+
+driver:
+  name: "docker"
+
+provisioner:
+  name: "ansible_playbook"
+  require_chef_for_busser: false
+  ansible_diff: true
+  ansible_version : latest
+  ansible_sudo: false
+  ansible_connection: "local"
+  idempotency_test: true
+  ansible_cfg_path: "../../../ansible.cfg"
+  ansible_inventory: "../../../inventory/localhost/inventory.hosts"
+  group_vars_path: "../../../inventory/localhost/group_vars"
+  host_vars_path: "../../../inventory/localhost/host_vars"
+  playbook: "test-playbook.yml"
+  additional_copy_role_path:
+    - "../../nginx"
+
+verifier:
+  name: "inspec"
+  inspec_tests:
+    - "../tests"
+
+
+
+platforms:
+ - name: centos-6
+   driver_config:
+     image: geerlingguy/docker-centos6-ansible:latest
+
+ - name: centos-7
+   driver_config:
+     image: geerlingguy/docker-centos7-ansible:latest
+
+ - name: centos-8
+   driver_config:
+     image: geerlingguy/docker-centos8-ansible:latest
+
+
+
+
+suites:
+  - name: "test1"
+
+

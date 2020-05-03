@@ -1,0 +1,89 @@
+I, [2020-04-19T18:56:38.055153 #26531]  INFO -- test1-centos-7: -----> Cleaning up any prior instances of <test1-centos-7>
+I, [2020-04-19T18:56:38.055254 #26531]  INFO -- test1-centos-7: -----> Destroying <test1-centos-7>...
+I, [2020-04-19T18:56:38.055567 #26531]  INFO -- test1-centos-7: Finished destroying <test1-centos-7> (0m0.00s).
+I, [2020-04-19T18:56:38.055827 #26531]  INFO -- test1-centos-7: -----> Testing <test1-centos-7>
+I, [2020-04-19T18:56:38.055896 #26531]  INFO -- test1-centos-7: -----> Creating <test1-centos-7>...
+I, [2020-04-19T18:56:40.056465 #26531]  INFO -- test1-centos-7: Waiting for SSH service on localhost:32855, retrying in 3 seconds
+I, [2020-04-19T18:56:43.306673 #26531]  INFO -- test1-centos-7: [SSH] Established
+I, [2020-04-19T18:56:43.308279 #26531]  INFO -- test1-centos-7: Finished creating <test1-centos-7> (0m5.25s).
+I, [2020-04-19T18:56:43.308481 #26531]  INFO -- test1-centos-7: -----> Converging <test1-centos-7>...
+I, [2020-04-19T18:56:43.309334 #26531]  INFO -- test1-centos-7: Preparing files for transfer
+I, [2020-04-19T18:56:43.309432 #26531]  INFO -- test1-centos-7: Preparing playbook
+I, [2020-04-19T18:56:43.309712 #26531]  INFO -- test1-centos-7: Preparing inventory
+I, [2020-04-19T18:56:43.310081 #26531]  INFO -- test1-centos-7: Preparing modules
+I, [2020-04-19T18:56:43.310400 #26531]  INFO -- test1-centos-7: nothing to do for modules
+I, [2020-04-19T18:56:43.310484 #26531]  INFO -- test1-centos-7: Preparing roles
+I, [2020-04-19T18:56:43.317039 #26531]  INFO -- test1-centos-7: Preparing ansible.cfg file
+I, [2020-04-19T18:56:43.317138 #26531]  INFO -- test1-centos-7: Found existing ansible.cfg
+I, [2020-04-19T18:56:43.317273 #26531]  INFO -- test1-centos-7: Preparing group_vars
+I, [2020-04-19T18:56:43.317494 #26531]  INFO -- test1-centos-7: Preparing additional_copy_path
+I, [2020-04-19T18:56:43.317603 #26531]  INFO -- test1-centos-7: Preparing host_vars
+I, [2020-04-19T18:56:43.317784 #26531]  INFO -- test1-centos-7: nothing to do for host_vars
+I, [2020-04-19T18:56:43.317832 #26531]  INFO -- test1-centos-7: Preparing spec
+I, [2020-04-19T18:56:43.317896 #26531]  INFO -- test1-centos-7: nothing to do for spec
+I, [2020-04-19T18:56:43.317933 #26531]  INFO -- test1-centos-7: Preparing library plugins
+I, [2020-04-19T18:56:43.318042 #26531]  INFO -- test1-centos-7: nothing to do for library plugins
+I, [2020-04-19T18:56:43.318080 #26531]  INFO -- test1-centos-7: Preparing callback plugins
+I, [2020-04-19T18:56:43.318217 #26531]  INFO -- test1-centos-7: nothing to do for callback plugins
+I, [2020-04-19T18:56:43.318250 #26531]  INFO -- test1-centos-7: Preparing filter_plugins
+I, [2020-04-19T18:56:43.318393 #26531]  INFO -- test1-centos-7: nothing to do for filter_plugins
+I, [2020-04-19T18:56:43.318427 #26531]  INFO -- test1-centos-7: Preparing lookup_plugins
+I, [2020-04-19T18:56:43.318534 #26531]  INFO -- test1-centos-7: nothing to do for lookup_plugins
+I, [2020-04-19T18:56:43.318598 #26531]  INFO -- test1-centos-7: Preparing ansible vault password
+I, [2020-04-19T18:56:43.318756 #26531]  INFO -- test1-centos-7: Preparing additional_ssh_private_keys
+I, [2020-04-19T18:56:43.318846 #26531]  INFO -- test1-centos-7: nothing to do for additional_ssh_private_keys
+I, [2020-04-19T18:56:43.318880 #26531]  INFO -- test1-centos-7: Finished Preparing files for transfer
+I, [2020-04-19T18:56:43.319124 #26531]  INFO -- test1-centos-7: Installing ansible, will try to determine platform os
+I, [2020-04-19T18:56:43.726065 #26531]  INFO -- test1-centos-7: Transferring files to <test1-centos-7>
+I, [2020-04-19T18:56:48.329266 #26531]  INFO -- test1-centos-7: 
+I, [2020-04-19T18:56:48.329341 #26531]  INFO -- test1-centos-7: PLAY [all] *********************************************************************
+I, [2020-04-19T18:56:48.386175 #26531]  INFO -- test1-centos-7: 
+I, [2020-04-19T18:56:48.386248 #26531]  INFO -- test1-centos-7: TASK [Gathering Facts] *********************************************************
+I, [2020-04-19T18:56:58.782580 #26531]  INFO -- test1-centos-7: [0;32mok: [localhost][0m
+I, [2020-04-19T18:56:58.799204 #26531]  INFO -- test1-centos-7: [0;32m[0m
+I, [2020-04-19T18:56:58.799291 #26531]  INFO -- test1-centos-7: TASK [nginx : Add and enable repository for Nginx] *****************************
+I, [2020-04-19T18:56:59.274316 #26531]  INFO -- test1-centos-7: [0;31m--- before: /etc/yum.repos.d/nginx.repo[0m
+I, [2020-04-19T18:56:59.274384 #26531]  INFO -- test1-centos-7: [0;31m[0m[0;32m+++ after: /etc/yum.repos.d/nginx.repo[0m
+I, [2020-04-19T18:56:59.274407 #26531]  INFO -- test1-centos-7: [0;32m[0m[0;36m@@ -0,0 +1,6 @@[0m
+I, [2020-04-19T18:56:59.274425 #26531]  INFO -- test1-centos-7: [0;36m[0m[0;32m+[nginx][0m
+I, [2020-04-19T18:56:59.274441 #26531]  INFO -- test1-centos-7: [0;32m[0m[0;32m+baseurl = http://nginx.org/packages/centos/7/$basearch/[0m
+I, [2020-04-19T18:56:59.274457 #26531]  INFO -- test1-centos-7: [0;32m[0m[0;32m+enabled = 1[0m
+I, [2020-04-19T18:56:59.274479 #26531]  INFO -- test1-centos-7: [0;32m[0m[0;32m+gpgcheck = 0[0m
+I, [2020-04-19T18:56:59.274496 #26531]  INFO -- test1-centos-7: [0;32m[0m[0;32m+name = nginx repo[0m
+I, [2020-04-19T18:56:59.274511 #26531]  INFO -- test1-centos-7: [0;32m[0m[0;32m+[0m
+I, [2020-04-19T18:56:59.274525 #26531]  INFO -- test1-centos-7: [0;32m[0m
+I, [2020-04-19T18:56:59.274539 #26531]  INFO -- test1-centos-7: [0;33mchanged: [localhost][0m
+I, [2020-04-19T18:56:59.291171 #26531]  INFO -- test1-centos-7: [0;33m[0m
+I, [2020-04-19T18:56:59.291240 #26531]  INFO -- test1-centos-7: TASK [nginx : Install Nginx] ***************************************************
+I, [2020-04-19T18:57:25.956460 #26531]  INFO -- test1-centos-7: [0;33mchanged: [localhost][0m
+I, [2020-04-19T18:57:25.960879 #26531]  INFO -- test1-centos-7: [0;33m[0m
+I, [2020-04-19T18:57:25.960988 #26531]  INFO -- test1-centos-7: PLAY RECAP *********************************************************************
+I, [2020-04-19T18:57:25.961048 #26531]  INFO -- test1-centos-7: [0;33mlocalhost[0m                  : [0;32mok=3   [0m [0;33mchanged=2   [0m unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+I, [2020-04-19T18:57:25.961095 #26531]  INFO -- test1-centos-7: 
+I, [2020-04-19T18:57:26.059543 #26531]  INFO -- test1-centos-7: Going to invoke ansible-playbook second time:
+I, [2020-04-19T18:57:30.106476 #26531]  INFO -- test1-centos-7: 
+I, [2020-04-19T18:57:30.106545 #26531]  INFO -- test1-centos-7: PLAY [all] *********************************************************************
+I, [2020-04-19T18:57:30.162266 #26531]  INFO -- test1-centos-7: 
+I, [2020-04-19T18:57:30.162345 #26531]  INFO -- test1-centos-7: TASK [Gathering Facts] *********************************************************
+I, [2020-04-19T18:57:41.298330 #26531]  INFO -- test1-centos-7: ok: [localhost]
+I, [2020-04-19T18:57:41.314999 #26531]  INFO -- test1-centos-7: 
+I, [2020-04-19T18:57:41.315074 #26531]  INFO -- test1-centos-7: TASK [nginx : Add and enable repository for Nginx] *****************************
+I, [2020-04-19T18:57:41.822640 #26531]  INFO -- test1-centos-7: ok: [localhost]
+I, [2020-04-19T18:57:41.839948 #26531]  INFO -- test1-centos-7: 
+I, [2020-04-19T18:57:41.840021 #26531]  INFO -- test1-centos-7: TASK [nginx : Install Nginx] ***************************************************
+I, [2020-04-19T18:57:42.658912 #26531]  INFO -- test1-centos-7: ok: [localhost]
+I, [2020-04-19T18:57:42.658978 #26531]  INFO -- test1-centos-7: 
+I, [2020-04-19T18:57:42.659005 #26531]  INFO -- test1-centos-7: PLAY RECAP *********************************************************************
+I, [2020-04-19T18:57:42.659028 #26531]  INFO -- test1-centos-7: localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+I, [2020-04-19T18:57:42.659046 #26531]  INFO -- test1-centos-7: 
+I, [2020-04-19T18:57:42.802410 #26531]  INFO -- test1-centos-7: Idempotence test: PASS
+I, [2020-04-19T18:57:42.803152 #26531]  INFO -- test1-centos-7: Downloading files from <test1-centos-7>
+I, [2020-04-19T18:57:42.806733 #26531]  INFO -- test1-centos-7: Finished converging <test1-centos-7> (0m59.50s).
+I, [2020-04-19T18:57:42.807031 #26531]  INFO -- test1-centos-7: -----> Setting up <test1-centos-7>...
+I, [2020-04-19T18:57:42.809788 #26531]  INFO -- test1-centos-7: Finished setting up <test1-centos-7> (0m0.00s).
+I, [2020-04-19T18:57:42.809942 #26531]  INFO -- test1-centos-7: -----> Verifying <test1-centos-7>...
+I, [2020-04-19T18:57:43.711657 #26531]  INFO -- test1-centos-7: Loaded Template for testing a role. 
+I, [2020-04-19T18:57:43.842505 #26531]  INFO -- test1-centos-7: Finished verifying <test1-centos-7> (0m1.03s).
+I, [2020-04-19T18:57:43.843057 #26531]  INFO -- test1-centos-7: -----> Destroying <test1-centos-7>...
+I, [2020-04-19T18:57:47.061917 #26531]  INFO -- test1-centos-7: Finished destroying <test1-centos-7> (0m3.22s).
+I, [2020-04-19T18:57:47.065642 #26531]  INFO -- test1-centos-7: Finished testing <test1-centos-7> (1m9.01s).

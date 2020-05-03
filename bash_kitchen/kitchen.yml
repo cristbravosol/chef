@@ -1,0 +1,38 @@
+---
+driver:
+  name: docker
+  provision_command: curl -L https://www.chef.io/chef/install.sh | bash
+
+
+provisioner:
+  name: shell
+  script: setup.sh
+
+
+#verifier:
+#  name: "inspec"
+#  inspec_tests:
+#    - "./tests_inspec"
+
+#verifier:
+#  name: "shell"
+#  command: sh tests/nginx_spec.sh 
+
+
+verifier:
+  name: "busser"
+
+
+
+platforms:
+ - name: centos-6
+     
+ - name: centos-7
+
+ - name: centos-8
+
+
+suites:
+  - name: "test1"
+
+

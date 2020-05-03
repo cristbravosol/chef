@@ -1,0 +1,10 @@
+---
+- name         : not idempotent
+  hosts        : "all"
+  gather_facts : true
+  become       : True
+
+  tasks:
+
+    - name: Non idempotent task
+      shell: ls

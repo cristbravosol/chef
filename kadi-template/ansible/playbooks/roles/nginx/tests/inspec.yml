@@ -1,0 +1,7 @@
+name: Template for testing a role.
+title: Nginx
+maintainer: jao
+copyright: jao
+license: Apache-2.0
+summary: An InSpec Compliance Profile
+version: 0.1.0

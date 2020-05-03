@@ -1,0 +1,14 @@
+---
+
+- name: "Add and enable repository for Nginx"
+  yum_repository:
+    name: "nginx"
+    description: "nginx repo"
+    baseurl: "http://nginx.org/packages/centos/{{ ansible_distribution_major_version }}/$basearch/"
+    gpgcheck: "no"
+    enabled: "yes"
+
+- name: "Install Nginx"
+  package:
+    name: "nginx"
+    state: "present"

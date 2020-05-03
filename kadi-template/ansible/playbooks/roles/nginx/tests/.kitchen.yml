@@ -1,0 +1,271 @@
+---
+
+# Here you can find general configuration for all Ansible cases that I use to use which are:
+#
+# 1 - local-permissions-default: To test role directly without worring about connections and permissions. 
+#     Rely on the kitchen framework system to install default requirements (Ansible, SSH login to container)
+#     Use case:
+#       - Inmutable infrastructures with self provision on start without worring about default image.
+#       - Full granted permission environment.
+#       - Quickly test role focusing on the role tasks and not in the connections and/or permissions
+#     Properties:
+#       - ansible_connection: "local" -> to don't worry about SSH connections.
+#       - ansible_sudo: "true" -> to don't worry about permissions inside the machine.
+#
+# 2 - local-permissions-custom-image: Test roles based on a custom image which is used to have 
+#     required things to speed up testing. SSH default connection it's done by kitchen.
+#     Use case:
+#       - Inmutable infrastructures with self provision on start without worring about default image.
+#       - Full granted permission environment.
+#     Properties:
+#       - same as local-permissions-default
+#
+# 3 - local-non-permissions-default: To test roles directly without worring about connections.
+#     Rely on the kitchen framework system to install default requirements (Ansible, SSH login to container)
+#     Use case:
+#       - Inmutable infrastructures with self provision on start without worring about default image.
+#       - Restricted permission environment.
+#     Properties:
+#       - ansible_connection: "local" -> to don't worry about SSH connections.
+#       - ansible_sudo: "false" -> to simulate with the permissions of the ansible connected user.
+#
+# 4 - local-non-permissions-custom image: To test roles directly without worring about connections.
+#     Rely on the image to install default requirements (Ansible, SSH login to container)
+#     Use case:
+#       - same as local-non-permissions-default
+#     Properties:
+#       - same as local-non-permissions-default
+#
+# 5 - ssh-default: To test roles with SSH connections. This requires and additional role to enable SSHing container through localhost.
+#     Use case:
+#       - Mutable infrastructures with push configuration.
+#       - Full granted permission environment.
+#       - Replicate access in real platforms.
+#     Properties:
+#       - ansible_connection: both -> to replicate real access need local to install setup and real role it's executed with ssh connection.
+#       - ansible_sudo: possible both -> to replicate real access with default user is don't required, but can depend of the default setup configuration.
+#       - ansible_host_key_checking: "true"  -> to disable strict ssh checking in first SSH connection to container locally. 
+#                                               If don't require always, needs to be explicit here. I user to have it in ansible.cfg
+#
+# Driver will create the infrastructure to run the tests
+# All this variables can be override at suite level inside of driver.
+# All this variables can be override at platform level inside of driver_config.
+#
+# Find all properties relative to kitchen-docker driver here: 
+# - https://github.com/test-kitchen/kitchen-docker/blob/master/README.md
+driver:
+  name: "docker"
+  #
+  # Docker image selection: If empty, it will generate a docker file image based on the platform name
+  #
+  # Don't perform installation of Omnibus Chef Package as we are using Ansible
+  require_chef_omnibus: false 
+  # Disable due to some images can't support a working upstart
+  disable_upstart: false
+  # Have to be disabled in MacOs as Docker are running in a VM
+  use_sudo: false 
+  # Name for default user created with sudo privileges
+  username: "ansible"
+  # Contaner hostname
+  hostname: "test"
+  # Proxy settings used when creating the Container. 
+  # Don't put proxy variables inside of Docker images.
+  # http_proxy: ""
+  # https_proxy: ""
+
+
+# Provisioner tells Kitchen which tool will provision the infrastructure created by the Driver.
+# All this variables can be override at suite level inside of provisioner.
+#
+# Repository: https://github.com/neillturner/kitchen-ansible
+# All available options: https://github.com/neillturner/kitchen-ansible/blob/master/provisioner_options.md
+provisioner:
+  name: "ansible_playbook"
+  # 
+  # Ansible installation performed by Kitchen-ansible properties.
+  #
+  # Ansible version to install
+  ansible_version: "2.7.1"
+  # Don't install Ansible with the omnibus_ansible script
+  require_ansible_omnibus: false
+  # Don't install Ansible with the through sources
+  require_ansible_source: false
+  # Install Ansible using Pip command
+  require_pip: true
+  # Don't install Ansible from the OS repository
+  require_ansible_repo: false
+  # Empty the Chef bootstrap url to ensure nothing related with Chef is installed
+  chef_bootstrap_url: ""
+  # Install Chef to run Busser for tests. Not required.
+  require_chef_for_busser: false
+  #
+  # Ansible pre execution parameters
+  #
+  # This suppose that ansible-lint it's installed in the image or can't work
+  # Command executed before Ansible playbooks works.
+  custom_pre_play_command: "PYTHONIOENCODING=utf-8 ansible-lint /tmp/kitchen/test-playbook.yml"
+  #
+  # Ansible execution parameters
+  #
+  # Execute provision without making changes
+  ansible_check: false
+  # Tells ansible to show you differences in the state when execute the playbook. Useful  when developing
+  ansible_diff: true
+  ansible_verbose: true
+  ansible_verbosity: 4
+  idempotency_test: true
+  # Limit host execution. Should be the same as the name in the set in the inventory for the machine
+  # limit: "test"
+  #
+  # Ansible path assingments
+  #
+  ansible_cfg_path: "../../../../ansible.cfg"
+  ansible_inventory: "../../../../inventory/localhost/inventory.hosts"
+  group_vars_path: "../../../../inventory/localhost/group_vars"
+  host_vars_path: "../../../../inventory/localhost/host_vars"
+  playbook: "test-playbook.yml"
+  # List of the roles to load for all the tests. As this is a role test should have always the same structure.
+  # If required different roles path for tests, can move this property inside "provisioner" inside suite cases.
+  # 
+  # Using "additional_copy_role_path instead of "role_path" to avoid copy non required tests
+  additional_copy_role_path:
+    - "../../nginx"
+  #
+  # NOTE: Ansible variables that should be declared inside of the playbooks, but no the tests
+  #
+  # Working with this, I waste a lot of time trying to simulate the real behaviour, f.e disabling 
+  # ansible_sudo variable to check that connection don't use privileges, and watch your test keep 
+  # passing when the real one does not because you forgot to set this variable here.
+  # for this reason I prefer to declare the connection parameters required at playbook level when differs.
+  # This has the benefir that if you use the same playbook for real execution you will know that connection will
+  # remain equal in the real environment.
+  # 
+  # Here you can find the variables that I would like to put inside playbooks instead of here in Kitchen configuration:
+  #
+  # Only required when using SSH. should be in the ansible.cfg file
+  # - ansible_host_key_checking: true
+  # Ansible ssh connection. Can be "local" or "ssh"
+  # - ansible_connection: "ssh"
+  # Check if the "ansible-playbook" command should be executed with sudo privileges
+  # - ansible_sudo: false
+  # Proxy settings should be declared inside Ansible as they can be lost.
+  # Proxy settings used when executing the command "ansible-playbook". if you connect through SSH, 
+  # or use "become" then the user of the connection won't have this environment variables.
+  # - http_proxy: ""
+  # - https_proxy: ""
+
+
+# Verifier tells properties related with the tool used to verify the infrastructure.
+# All this variables can be override at suite level inside of verifier.
+#
+# Repository: https://github.com/inspec/kitchen-inspec
+verifier:
+  name: "inspec"
+
+
+# Platforms are required in order to know which image use, and suite case are replicated across platforms.
+# So if you have two platforms and one suite, when execute "kitchen list" you will see two tests.
+platforms:
+  - name: "centos"
+    # NOTE: Do not use custom Dockerfiles because kitchen-docker create a custom one to add
+    #       Ansible login configuration. If you override the Dockerfile, must change:
+    #       - "dockerfile" property to add authorized_keys from main host.
+    #       - "public_key" property to add the custom public key that custom Dockerfile use.
+    #       - "private_key" property to add the custom private key that custom Dockerfile use.
+    #
+    # Here we can specify an image for an specific platform, instead of the generated with kitchen-docker.
+    # driver_config:
+      # To use an image from private docker repository use format
+      # repository:port/image:version
+      # image: ""
+
+
+# Here you define the suite cases of the role.
+# He we will cover different approaches based on needs that I have in different projects.
+suites:
+  #
+  # Usage: First approach to desing your role, to check if can work without any permission or connection problem.
+  #
+  - name: "local-permissions-default"
+    provisioner:
+      ansible_connection: "local"
+      ansible_sudo: true
+
+    # Custom paths for tests, in order to know which variables are being executed and which tests
+    verifier:
+      inspec_tests: 
+        - "../tests"
+
+  #
+  # Usage: First approach to desing your role, without taking care of where it's be deployed, but ensuring that can be executable
+  #        for normal users.
+  - name: "local-non-permissions-default"
+    provisioner:
+      ansible_connection: "local"
+      ansible_sudo: false
+
+    # Custom paths for tests, in order to know which variables are being executed and which tests
+    verifier:
+      inspec_tests: 
+        - "../tests"
+
+  #
+  # Usage: Testing machines that self provisioned at start, like AutoScalingGroups in AWS.
+  #        The image already contains Ansible, so the provisioning is quicker.
+  - name: "local-permissions-custom-image"
+    driver_config:
+      image: "geerlingguy/docker-centos7-ansible:latest"
+
+    provisioner:
+      ansible_connection: "local"
+      ansible_sudo: true
+
+    # Custom paths for tests, in order to know which variables are being executed and which tests
+    verifier:
+      inspec_tests: 
+        - "../tests"
+
+  #
+  # Usage: Testing machines that self provisioned but without elevated privileges for Ansible.
+  #        This case is not desired for installing but can be possible in some restricted environments
+  #        or dockerized environments which have all installed and already configured for the use.
+  #
+  #        The image already contains Ansible, so the provisioning is quicker.
+  - name: "local-non-permissions-custom-image"
+    driver_config:
+      image: "geerlingguy/docker-centos7-ansible:latest"
+
+    provisioner:
+      ansible_connection: "local"
+      ansible_sudo: false
+
+    # Custom paths for tests, in order to know which variables are being executed and which tests
+    verifier:
+      inspec_tests: 
+        - "../tests"
+  
+# In the SSH tests, we connect to the docker container from itself, making an ssh to localhost in order
+# to test that machine is reachable.
+
+  #
+  # Usage: Testing inmutables machines provisioned with elevated privileges for Ansible.
+  #        The image already contains Ansible, so the provisioning is quicker.
+  - name: "ssh-default"
+    provisioner:
+      # Disabled to access to the remote host 
+      ansible_host_key_checking: false
+      ansible_connection: "ssh"
+      ansible_sudo: false
+      # SSH requires additional role to enable ssh to localhost to test connection
+      playbook: "test-playbook-ssh.yml"
+      # if you want make references to real playbooks to execute, use "additional_copy_path"
+      additional_copy_path:
+        - "test-playbook.yml"
+      additional_copy_role_path:
+        - "../../ansible_initial_setup"
+        - "../../nginx"
+
+    # Custom paths for tests, in order to know which variables are being executed and which tests
+    verifier:
+      inspec_tests: 
+        - "../tests"

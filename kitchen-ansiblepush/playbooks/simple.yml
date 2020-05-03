@@ -1,0 +1,15 @@
+---
+- name         : Simple
+  hosts        : "all"
+  gather_facts : true
+  become       : true
+  tasks:
+    - name: Run dummy Copy
+      copy:
+        content="{{ inventory_hostname }}"
+        dest="/var/{{ inventory_hostname }}-test.txt"
+
+    - name: Run ls
+      command: ls
+      become: False
+      changed_when: false

@@ -1,0 +1,56 @@
+---
+
+driver                      :
+    name                    : docker
+    use_sudo                : false
+
+
+provisioner                 :
+    name                    : ansible_push
+    ansible_config          : "./ansible.cfg"
+    idempotency_test        : true
+
+platforms:
+
+    - name                  : "centos6"
+      driver_config         :
+        image               : centos:6
+        platform            : centos
+
+
+    - name                  : "centos7"
+      driver_config         :
+        image               : centos:7
+        platform            : centos
+
+
+    - name                  : "centos8"
+      driver_config         :
+        image               : centos:8
+        platform            : centos
+
+
+
+verifier:
+  name: "inspec"
+  inspec_tests:
+    - "./tests_inspec"
+
+
+
+suites                      :
+  - name                    : test1
+    provisioner             :
+      playbook              : "playbooks/test-playbook.yml"
+      chef_bootstrap_url    : nil
+
+#  - name                    : simpleWithChef
+#    provisioner             :
+#      playbook              : "test/application/simple.yml"
+#
+#  - name                    : notidempotent
+#    provisioner             :
+#      playbook              : "test/application/notidempotent.yml"
+#      fail_non_idempotent   : false
+#      chef_bootstrap_url    : nil
+#

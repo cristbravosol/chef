@@ -1,0 +1,41 @@
+AllCops:
+  Include:
+    - lib/**
+
+Documentation:
+  Enabled: false
+AlignParameters:
+  Enabled: true
+Encoding:
+  Enabled: true
+HashSyntax:
+  Enabled: true
+LineLength:
+  Enabled: false
+MethodLength:
+  Max: 200
+NumericLiterals:
+  MinDigits: 10
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+# Offense count: 6
+Metrics/AbcSize:
+  Max: 120
+
+# Offense count: 1
+# Configuration parameters: CountComments.
+Metrics/ClassLength:
+  Max: 250
+
+# Offense count: 3
+Metrics/CyclomaticComplexity:
+  Max: 30
+
+# Offense count: 3
+Metrics/PerceivedComplexity:
+  Max: 30

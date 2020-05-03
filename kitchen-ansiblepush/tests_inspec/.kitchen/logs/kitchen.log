@@ -1,0 +1,211 @@
+I, [2020-04-19T18:55:24.004813 #26531]  INFO -- Kitchen: -----> Starting Test Kitchen (v2.3.4)
+I, [2020-04-19T18:55:27.336298 #26531]  INFO -- Kitchen: -----> Cleaning up any prior instances of <test1-centos-6>
+I, [2020-04-19T18:55:27.336552 #26531]  INFO -- Kitchen: -----> Destroying <test1-centos-6>...
+I, [2020-04-19T18:55:27.337175 #26531]  INFO -- Kitchen: -----> Testing <test1-centos-6>
+I, [2020-04-19T18:55:27.337244 #26531]  INFO -- Kitchen: -----> Creating <test1-centos-6>...
+I, [2020-04-19T18:55:27.395945 #26531]  INFO -- Kitchen: Sending build context to Docker daemon  17.92kB
+I, [2020-04-19T18:55:27.620566 #26531]  INFO -- Kitchen: Step 1/17 : FROM geerlingguy/docker-centos6-ansible:latest
+I, [2020-04-19T18:55:27.620881 #26531]  INFO -- Kitchen:  ---> 08e9c459fbe8
+I, [2020-04-19T18:55:27.620920 #26531]  INFO -- Kitchen: Step 2/17 : ENV container docker
+I, [2020-04-19T18:55:27.647326 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:55:27.647390 #26531]  INFO -- Kitchen:  ---> 23691f38e174
+I, [2020-04-19T18:55:27.647420 #26531]  INFO -- Kitchen: Step 3/17 : RUN yum clean all
+I, [2020-04-19T18:55:27.658590 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:55:27.658794 #26531]  INFO -- Kitchen:  ---> 15d5d0916529
+I, [2020-04-19T18:55:27.658881 #26531]  INFO -- Kitchen: Step 4/17 : RUN yum install -y sudo openssh-server openssh-clients which curl
+I, [2020-04-19T18:55:27.668785 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:55:27.668860 #26531]  INFO -- Kitchen:  ---> 03837fc63e22
+I, [2020-04-19T18:55:27.668888 #26531]  INFO -- Kitchen: Step 5/17 : RUN [ -f "/etc/ssh/ssh_host_rsa_key" ] || ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
+I, [2020-04-19T18:55:27.680701 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:55:27.680770 #26531]  INFO -- Kitchen:  ---> 861fd09a23c6
+I, [2020-04-19T18:55:27.680798 #26531]  INFO -- Kitchen: Step 6/17 : RUN [ -f "/etc/ssh/ssh_host_dsa_key" ] || ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key -N ''
+I, [2020-04-19T18:55:27.689896 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:55:27.689994 #26531]  INFO -- Kitchen:  ---> 8a330ec99ca6
+I, [2020-04-19T18:55:27.690065 #26531]  INFO -- Kitchen: Step 7/17 : RUN if ! getent passwd kitchen; then                   useradd -d /home/kitchen -m -s /bin/bash -p '*' kitchen;                 fi
+I, [2020-04-19T18:55:27.709934 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:55:27.710005 #26531]  INFO -- Kitchen:  ---> 30d490e19fbc
+I, [2020-04-19T18:55:27.710032 #26531]  INFO -- Kitchen: Step 8/17 : RUN echo "kitchen ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+I, [2020-04-19T18:55:27.717938 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:55:27.718008 #26531]  INFO -- Kitchen:  ---> bb969d7e2e39
+I, [2020-04-19T18:55:27.718030 #26531]  INFO -- Kitchen: Step 9/17 : RUN echo "Defaults !requiretty" >> /etc/sudoers
+I, [2020-04-19T18:55:27.731529 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:55:27.731599 #26531]  INFO -- Kitchen:  ---> 1e2ea78dea46
+I, [2020-04-19T18:55:27.731621 #26531]  INFO -- Kitchen: Step 10/17 : RUN mkdir -p /home/kitchen/.ssh
+I, [2020-04-19T18:55:27.732455 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:55:27.732537 #26531]  INFO -- Kitchen:  ---> ab8d50129e30
+I, [2020-04-19T18:55:27.732573 #26531]  INFO -- Kitchen: Step 11/17 : RUN chown -R kitchen /home/kitchen/.ssh
+I, [2020-04-19T18:55:27.733755 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:55:27.733833 #26531]  INFO -- Kitchen:  ---> 1d94bfe6f8dc
+I, [2020-04-19T18:55:27.733906 #26531]  INFO -- Kitchen: Step 12/17 : RUN chmod 0700 /home/kitchen/.ssh
+I, [2020-04-19T18:55:27.740140 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:55:27.740234 #26531]  INFO -- Kitchen:  ---> f3412f714c16
+I, [2020-04-19T18:55:27.740270 #26531]  INFO -- Kitchen: Step 13/17 : RUN touch /home/kitchen/.ssh/authorized_keys
+I, [2020-04-19T18:55:27.741362 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:55:27.741484 #26531]  INFO -- Kitchen:  ---> 17d29c3d8202
+I, [2020-04-19T18:55:27.741593 #26531]  INFO -- Kitchen: Step 14/17 : RUN chown kitchen /home/kitchen/.ssh/authorized_keys
+I, [2020-04-19T18:55:27.742619 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:55:27.742702 #26531]  INFO -- Kitchen:  ---> 9ea9ff09bc1a
+I, [2020-04-19T18:55:27.742743 #26531]  INFO -- Kitchen: Step 15/17 : RUN chmod 0600 /home/kitchen/.ssh/authorized_keys
+I, [2020-04-19T18:55:27.743604 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:55:27.743756 #26531]  INFO -- Kitchen:  ---> 52ed27809e59
+I, [2020-04-19T18:55:27.743867 #26531]  INFO -- Kitchen: Step 16/17 : RUN mkdir -p /run/sshd
+I, [2020-04-19T18:55:27.744835 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:55:27.744942 #26531]  INFO -- Kitchen:  ---> 1ff79304c27a
+I, [2020-04-19T18:55:27.744987 #26531]  INFO -- Kitchen: Step 17/17 : RUN echo ssh-rsa\ AAAAB3NzaC1yc2EAAAADAQABAAABAQDI5upP0bDHYzuFXn8d3KEOvKJe9dy28xm7JZ7IfCUkjjoN6BehBHC2CstKmt9tlF3d7fjg7LSFQ/Z20qQxzlLHrSdCo3h9YE3XSk6qD4sXHiJN6NfSmHuKiea5YA9f/R5SDndXAtoLHNToIaYKMSFXV7dyl5vi823Kcu3OguRuxpVHyZcVjUaDgk29V4QXgWfH799VuEV09YxzSaag2Vlm8VtUHWqIZgylcuXbAljsNUPHUhS79xWcKXBTA/2O9ByIgv21P/eLBTg7Cxh\+PlS\+kE\+BsQMXhTqrYNbhQ1y4XJSw8h0CHpUHcgZ/CNQxXVeV31TeNfsGMRq02U/yJ/JB\ kitchen_docker_key >> /home/kitchen/.ssh/authorized_keys
+I, [2020-04-19T18:55:27.746647 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:55:27.746789 #26531]  INFO -- Kitchen:  ---> c940edbe1694
+I, [2020-04-19T18:55:27.749832 #26531]  INFO -- Kitchen: Successfully built c940edbe1694
+I, [2020-04-19T18:55:27.989051 #26531]  INFO -- Kitchen: a7e341fecbaecceee78e9dab1d057ab7f9d1a025987464ec6766614b27706995
+I, [2020-04-19T18:55:28.800140 #26531]  INFO -- Kitchen: 0.0.0.0:32854
+I, [2020-04-19T18:55:32.392444 #26531]  INFO -- Kitchen: -----> Converging <test1-centos-6>...
+I, [2020-04-19T18:56:34.543603 #26531]  INFO -- Kitchen: -----> Setting up <test1-centos-6>...
+I, [2020-04-19T18:56:34.544756 #26531]  INFO -- Kitchen: -----> Verifying <test1-centos-6>...
+I, [2020-04-19T18:56:36.279167 #26531]  INFO -- Kitchen: -----> Destroying <test1-centos-6>...
+I, [2020-04-19T18:56:36.279439 #26531]  INFO -- Kitchen: [Docker] Destroying Docker container a7e341fecbaecceee78e9dab1d057ab7f9d1a025987464ec6766614b27706995
+I, [2020-04-19T18:56:36.761106 #26531]  INFO -- Kitchen: UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+I, [2020-04-19T18:56:36.761294 #26531]  INFO -- Kitchen: root                26610               26593               0                   18:55               ?                   00:00:00            /usr/sbin/sshd -D -o UseDNS=no -o UsePAM=no -o PasswordAuthentication=yes -o UsePrivilegeSeparation=no -o PidFile=/tmp/sshd.pid
+I, [2020-04-19T18:56:36.761321 #26531]  INFO -- Kitchen: root                26657               26610               0                   18:55               ?                   00:00:00            sshd: kitchen@notty
+I, [2020-04-19T18:56:36.761341 #26531]  INFO -- Kitchen: root                27024               26610               1                   18:56               ?                   00:00:00            sshd: kitchen@notty
+I, [2020-04-19T18:56:37.852587 #26531]  INFO -- Kitchen: a7e341fecbaecceee78e9dab1d057ab7f9d1a025987464ec6766614b27706995
+I, [2020-04-19T18:56:38.006034 #26531]  INFO -- Kitchen: a7e341fecbaecceee78e9dab1d057ab7f9d1a025987464ec6766614b27706995
+I, [2020-04-19T18:56:38.055113 #26531]  INFO -- Kitchen: -----> Cleaning up any prior instances of <test1-centos-7>
+I, [2020-04-19T18:56:38.055234 #26531]  INFO -- Kitchen: -----> Destroying <test1-centos-7>...
+I, [2020-04-19T18:56:38.055796 #26531]  INFO -- Kitchen: -----> Testing <test1-centos-7>
+I, [2020-04-19T18:56:38.055878 #26531]  INFO -- Kitchen: -----> Creating <test1-centos-7>...
+I, [2020-04-19T18:56:38.186838 #26531]  INFO -- Kitchen: Sending build context to Docker daemon  34.82kB
+I, [2020-04-19T18:56:38.977714 #26531]  INFO -- Kitchen: Step 1/17 : FROM geerlingguy/docker-centos7-ansible:latest
+I, [2020-04-19T18:56:39.011465 #26531]  INFO -- Kitchen:  ---> 9d5dccae22ee
+I, [2020-04-19T18:56:39.011587 #26531]  INFO -- Kitchen: Step 2/17 : ENV container docker
+I, [2020-04-19T18:56:39.034646 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:56:39.034746 #26531]  INFO -- Kitchen:  ---> f056ec1e7ff5
+I, [2020-04-19T18:56:39.034769 #26531]  INFO -- Kitchen: Step 3/17 : RUN yum clean all
+I, [2020-04-19T18:56:39.045828 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:56:39.045972 #26531]  INFO -- Kitchen:  ---> 6186e90ff3c4
+I, [2020-04-19T18:56:39.046033 #26531]  INFO -- Kitchen: Step 4/17 : RUN yum install -y sudo openssh-server openssh-clients which curl
+I, [2020-04-19T18:56:39.054966 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:56:39.055080 #26531]  INFO -- Kitchen:  ---> 561e94d704a5
+I, [2020-04-19T18:56:39.055111 #26531]  INFO -- Kitchen: Step 5/17 : RUN [ -f "/etc/ssh/ssh_host_rsa_key" ] || ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
+I, [2020-04-19T18:56:39.087812 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:56:39.087997 #26531]  INFO -- Kitchen:  ---> f5b7a39f876b
+I, [2020-04-19T18:56:39.088057 #26531]  INFO -- Kitchen: Step 6/17 : RUN [ -f "/etc/ssh/ssh_host_dsa_key" ] || ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key -N ''
+I, [2020-04-19T18:56:39.102555 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:56:39.102659 #26531]  INFO -- Kitchen:  ---> 57bb8b888936
+I, [2020-04-19T18:56:39.102766 #26531]  INFO -- Kitchen: Step 7/17 : RUN if ! getent passwd kitchen; then                   useradd -d /home/kitchen -m -s /bin/bash -p '*' kitchen;                 fi
+I, [2020-04-19T18:56:39.106834 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:56:39.106914 #26531]  INFO -- Kitchen:  ---> c60e7bece541
+I, [2020-04-19T18:56:39.106951 #26531]  INFO -- Kitchen: Step 8/17 : RUN echo "kitchen ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+I, [2020-04-19T18:56:39.108364 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:56:39.108432 #26531]  INFO -- Kitchen:  ---> 9948f4915c92
+I, [2020-04-19T18:56:39.108462 #26531]  INFO -- Kitchen: Step 9/17 : RUN echo "Defaults !requiretty" >> /etc/sudoers
+I, [2020-04-19T18:56:39.110205 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:56:39.110388 #26531]  INFO -- Kitchen:  ---> 473e2a847eec
+I, [2020-04-19T18:56:39.110428 #26531]  INFO -- Kitchen: Step 10/17 : RUN mkdir -p /home/kitchen/.ssh
+I, [2020-04-19T18:56:39.125180 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:56:39.125279 #26531]  INFO -- Kitchen:  ---> a998c7622f65
+I, [2020-04-19T18:56:39.125318 #26531]  INFO -- Kitchen: Step 11/17 : RUN chown -R kitchen /home/kitchen/.ssh
+I, [2020-04-19T18:56:39.126155 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:56:39.126216 #26531]  INFO -- Kitchen:  ---> 7bf473227036
+I, [2020-04-19T18:56:39.126240 #26531]  INFO -- Kitchen: Step 12/17 : RUN chmod 0700 /home/kitchen/.ssh
+I, [2020-04-19T18:56:39.148686 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:56:39.148760 #26531]  INFO -- Kitchen:  ---> 89e2fe881edb
+I, [2020-04-19T18:56:39.148782 #26531]  INFO -- Kitchen: Step 13/17 : RUN touch /home/kitchen/.ssh/authorized_keys
+I, [2020-04-19T18:56:39.149922 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:56:39.149998 #26531]  INFO -- Kitchen:  ---> 37995ab77a33
+I, [2020-04-19T18:56:39.150023 #26531]  INFO -- Kitchen: Step 14/17 : RUN chown kitchen /home/kitchen/.ssh/authorized_keys
+I, [2020-04-19T18:56:39.156335 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:56:39.156512 #26531]  INFO -- Kitchen:  ---> 44ff85ca8827
+I, [2020-04-19T18:56:39.156565 #26531]  INFO -- Kitchen: Step 15/17 : RUN chmod 0600 /home/kitchen/.ssh/authorized_keys
+I, [2020-04-19T18:56:39.166447 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:56:39.166516 #26531]  INFO -- Kitchen:  ---> 4b0fbd48c593
+I, [2020-04-19T18:56:39.166545 #26531]  INFO -- Kitchen: Step 16/17 : RUN mkdir -p /run/sshd
+I, [2020-04-19T18:56:39.168211 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:56:39.168294 #26531]  INFO -- Kitchen:  ---> f62b3e631c6d
+I, [2020-04-19T18:56:39.168440 #26531]  INFO -- Kitchen: Step 17/17 : RUN echo ssh-rsa\ AAAAB3NzaC1yc2EAAAADAQABAAABAQDI5upP0bDHYzuFXn8d3KEOvKJe9dy28xm7JZ7IfCUkjjoN6BehBHC2CstKmt9tlF3d7fjg7LSFQ/Z20qQxzlLHrSdCo3h9YE3XSk6qD4sXHiJN6NfSmHuKiea5YA9f/R5SDndXAtoLHNToIaYKMSFXV7dyl5vi823Kcu3OguRuxpVHyZcVjUaDgk29V4QXgWfH799VuEV09YxzSaag2Vlm8VtUHWqIZgylcuXbAljsNUPHUhS79xWcKXBTA/2O9ByIgv21P/eLBTg7Cxh\+PlS\+kE\+BsQMXhTqrYNbhQ1y4XJSw8h0CHpUHcgZ/CNQxXVeV31TeNfsGMRq02U/yJ/JB\ kitchen_docker_key >> /home/kitchen/.ssh/authorized_keys
+I, [2020-04-19T18:56:39.189176 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:56:39.189318 #26531]  INFO -- Kitchen:  ---> 9869f03ab99b
+I, [2020-04-19T18:56:39.190287 #26531]  INFO -- Kitchen: Successfully built 9869f03ab99b
+I, [2020-04-19T18:56:39.319391 #26531]  INFO -- Kitchen: 32d58dc0c548d34bb2426ab4191a2177d87f4cf71c19bd8abe23f7da5da1043e
+I, [2020-04-19T18:56:40.040165 #26531]  INFO -- Kitchen: 0.0.0.0:32855
+I, [2020-04-19T18:56:43.308422 #26531]  INFO -- Kitchen: -----> Converging <test1-centos-7>...
+I, [2020-04-19T18:57:42.806990 #26531]  INFO -- Kitchen: -----> Setting up <test1-centos-7>...
+I, [2020-04-19T18:57:42.809916 #26531]  INFO -- Kitchen: -----> Verifying <test1-centos-7>...
+I, [2020-04-19T18:57:43.843020 #26531]  INFO -- Kitchen: -----> Destroying <test1-centos-7>...
+I, [2020-04-19T18:57:43.843298 #26531]  INFO -- Kitchen: [Docker] Destroying Docker container 32d58dc0c548d34bb2426ab4191a2177d87f4cf71c19bd8abe23f7da5da1043e
+I, [2020-04-19T18:57:44.331422 #26531]  INFO -- Kitchen: UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+I, [2020-04-19T18:57:44.331605 #26531]  INFO -- Kitchen: root                27234               27219               0                   18:56               ?                   00:00:00            /usr/sbin/sshd -D -o UseDNS=no -o UsePAM=no -o PasswordAuthentication=yes -o UsePrivilegeSeparation=no -o PidFile=/tmp/sshd.pid
+I, [2020-04-19T18:57:44.331637 #26531]  INFO -- Kitchen: root                27284               27234               0                   18:56               ?                   00:00:00            sshd: kitchen@notty
+I, [2020-04-19T18:57:44.331658 #26531]  INFO -- Kitchen: root                27686               27234               1                   18:57               ?                   00:00:00            sshd: kitchen@notty
+I, [2020-04-19T18:57:46.795898 #26531]  INFO -- Kitchen: 32d58dc0c548d34bb2426ab4191a2177d87f4cf71c19bd8abe23f7da5da1043e
+I, [2020-04-19T18:57:46.998999 #26531]  INFO -- Kitchen: 32d58dc0c548d34bb2426ab4191a2177d87f4cf71c19bd8abe23f7da5da1043e
+I, [2020-04-19T18:57:47.066097 #26531]  INFO -- Kitchen: -----> Cleaning up any prior instances of <test1-centos-8>
+I, [2020-04-19T18:57:47.066221 #26531]  INFO -- Kitchen: -----> Destroying <test1-centos-8>...
+I, [2020-04-19T18:57:47.066713 #26531]  INFO -- Kitchen: -----> Testing <test1-centos-8>
+I, [2020-04-19T18:57:47.066784 #26531]  INFO -- Kitchen: -----> Creating <test1-centos-8>...
+I, [2020-04-19T18:57:47.132707 #26531]  INFO -- Kitchen: Sending build context to Docker daemon  51.71kB
+I, [2020-04-19T18:57:47.516265 #26531]  INFO -- Kitchen: Step 1/17 : FROM geerlingguy/docker-centos8-ansible:latest
+I, [2020-04-19T18:57:47.546915 #26531]  INFO -- Kitchen:  ---> 778b8cfafe48
+I, [2020-04-19T18:57:47.546993 #26531]  INFO -- Kitchen: Step 2/17 : ENV container docker
+I, [2020-04-19T18:57:47.559010 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:57:47.559236 #26531]  INFO -- Kitchen:  ---> ed29227828df
+I, [2020-04-19T18:57:47.559282 #26531]  INFO -- Kitchen: Step 3/17 : RUN yum clean all
+I, [2020-04-19T18:57:47.570745 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:57:47.570955 #26531]  INFO -- Kitchen:  ---> 3f484b39733d
+I, [2020-04-19T18:57:47.571008 #26531]  INFO -- Kitchen: Step 4/17 : RUN yum install -y sudo openssh-server openssh-clients which curl
+I, [2020-04-19T18:57:47.607192 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:57:47.607269 #26531]  INFO -- Kitchen:  ---> f699436e240a
+I, [2020-04-19T18:57:47.607295 #26531]  INFO -- Kitchen: Step 5/17 : RUN [ -f "/etc/ssh/ssh_host_rsa_key" ] || ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
+I, [2020-04-19T18:57:47.612084 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:57:47.612213 #26531]  INFO -- Kitchen:  ---> 4994943e0967
+I, [2020-04-19T18:57:47.612256 #26531]  INFO -- Kitchen: Step 6/17 : RUN [ -f "/etc/ssh/ssh_host_dsa_key" ] || ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key -N ''
+I, [2020-04-19T18:57:47.655179 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:57:47.655309 #26531]  INFO -- Kitchen:  ---> 1c9db708cfb2
+I, [2020-04-19T18:57:47.655342 #26531]  INFO -- Kitchen: Step 7/17 : RUN if ! getent passwd kitchen; then                   useradd -d /home/kitchen -m -s /bin/bash -p '*' kitchen;                 fi
+I, [2020-04-19T18:57:47.667870 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:57:47.667969 #26531]  INFO -- Kitchen:  ---> 8a0241eb73c5
+I, [2020-04-19T18:57:47.667995 #26531]  INFO -- Kitchen: Step 8/17 : RUN echo "kitchen ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+I, [2020-04-19T18:57:47.690187 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:57:47.690331 #26531]  INFO -- Kitchen:  ---> 002d58992f1c
+I, [2020-04-19T18:57:47.690384 #26531]  INFO -- Kitchen: Step 9/17 : RUN echo "Defaults !requiretty" >> /etc/sudoers
+I, [2020-04-19T18:57:47.698947 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:57:47.699027 #26531]  INFO -- Kitchen:  ---> d7b1905189b1
+I, [2020-04-19T18:57:47.699053 #26531]  INFO -- Kitchen: Step 10/17 : RUN mkdir -p /home/kitchen/.ssh
+I, [2020-04-19T18:57:47.703868 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:57:47.703951 #26531]  INFO -- Kitchen:  ---> c13d3df37141
+I, [2020-04-19T18:57:47.704003 #26531]  INFO -- Kitchen: Step 11/17 : RUN chown -R kitchen /home/kitchen/.ssh
+I, [2020-04-19T18:57:47.705530 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:57:47.705676 #26531]  INFO -- Kitchen:  ---> 80ae962fdcb3
+I, [2020-04-19T18:57:47.705712 #26531]  INFO -- Kitchen: Step 12/17 : RUN chmod 0700 /home/kitchen/.ssh
+I, [2020-04-19T18:57:47.706995 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:57:47.707075 #26531]  INFO -- Kitchen:  ---> e794029ee47c
+I, [2020-04-19T18:57:47.707107 #26531]  INFO -- Kitchen: Step 13/17 : RUN touch /home/kitchen/.ssh/authorized_keys
+I, [2020-04-19T18:57:47.708477 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:57:47.708669 #26531]  INFO -- Kitchen:  ---> 59aa099b7c52
+I, [2020-04-19T18:57:47.708828 #26531]  INFO -- Kitchen: Step 14/17 : RUN chown kitchen /home/kitchen/.ssh/authorized_keys
+I, [2020-04-19T18:57:47.717190 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:57:47.717268 #26531]  INFO -- Kitchen:  ---> bf6da72dfa46
+I, [2020-04-19T18:57:47.717326 #26531]  INFO -- Kitchen: Step 15/17 : RUN chmod 0600 /home/kitchen/.ssh/authorized_keys
+I, [2020-04-19T18:57:47.722976 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:57:47.723111 #26531]  INFO -- Kitchen:  ---> 4bcebf17d692
+I, [2020-04-19T18:57:47.723145 #26531]  INFO -- Kitchen: Step 16/17 : RUN mkdir -p /run/sshd
+I, [2020-04-19T18:57:47.725094 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:57:47.725232 #26531]  INFO -- Kitchen:  ---> 79a76dbc13c5
+I, [2020-04-19T18:57:47.725261 #26531]  INFO -- Kitchen: Step 17/17 : RUN echo ssh-rsa\ AAAAB3NzaC1yc2EAAAADAQABAAABAQDI5upP0bDHYzuFXn8d3KEOvKJe9dy28xm7JZ7IfCUkjjoN6BehBHC2CstKmt9tlF3d7fjg7LSFQ/Z20qQxzlLHrSdCo3h9YE3XSk6qD4sXHiJN6NfSmHuKiea5YA9f/R5SDndXAtoLHNToIaYKMSFXV7dyl5vi823Kcu3OguRuxpVHyZcVjUaDgk29V4QXgWfH799VuEV09YxzSaag2Vlm8VtUHWqIZgylcuXbAljsNUPHUhS79xWcKXBTA/2O9ByIgv21P/eLBTg7Cxh\+PlS\+kE\+BsQMXhTqrYNbhQ1y4XJSw8h0CHpUHcgZ/CNQxXVeV31TeNfsGMRq02U/yJ/JB\ kitchen_docker_key >> /home/kitchen/.ssh/authorized_keys
+I, [2020-04-19T18:57:47.733247 #26531]  INFO -- Kitchen:  ---> Using cache
+I, [2020-04-19T18:57:47.733450 #26531]  INFO -- Kitchen:  ---> cc0db182422c
+I, [2020-04-19T18:57:47.733514 #26531]  INFO -- Kitchen: Successfully built cc0db182422c
+I, [2020-04-19T18:57:47.866642 #26531]  INFO -- Kitchen: b16814fa07c0ec2079243a16361ae76648c6b87944e79c7cd48d958c32406861
+I, [2020-04-19T18:57:48.474278 #26531]  INFO -- Kitchen: 0.0.0.0:32856
+I, [2020-04-19T18:57:52.038855 #26531]  INFO -- Kitchen: -----> Converging <test1-centos-8>...
+I, [2020-04-19T18:58:42.729108 #26531]  INFO -- Kitchen: -----> Setting up <test1-centos-8>...
+I, [2020-04-19T18:58:42.730213 #26531]  INFO -- Kitchen: -----> Verifying <test1-centos-8>...
+I, [2020-04-19T18:58:43.997942 #26531]  INFO -- Kitchen: -----> Destroying <test1-centos-8>...
+I, [2020-04-19T18:58:43.998202 #26531]  INFO -- Kitchen: [Docker] Destroying Docker container b16814fa07c0ec2079243a16361ae76648c6b87944e79c7cd48d958c32406861
+I, [2020-04-19T18:58:44.278651 #26531]  INFO -- Kitchen: UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+I, [2020-04-19T18:58:44.278740 #26531]  INFO -- Kitchen: root                27901               27884               0                   18:57               ?                   00:00:00            /usr/sbin/sshd -D -o UseDNS=no -o UsePAM=no -o PasswordAuthentication=yes -o UsePrivilegeSeparation=no -o PidFile=/tmp/sshd.pid
+I, [2020-04-19T18:58:44.278769 #26531]  INFO -- Kitchen: root                27952               27901               0                   18:57               ?                   00:00:00            sshd: kitchen [priv]
+I, [2020-04-19T18:58:44.278790 #26531]  INFO -- Kitchen: vagrant             27954               27952               0                   18:57               ?                   00:00:00            sshd: kitchen@notty
+I, [2020-04-19T18:58:44.278811 #26531]  INFO -- Kitchen: root                28423               27901               0                   18:58               ?                   00:00:00            sshd: kitchen [priv]
+I, [2020-04-19T18:58:44.278831 #26531]  INFO -- Kitchen: vagrant             28425               28423               0                   18:58               ?                   00:00:00            sshd: kitchen@notty
+I, [2020-04-19T18:58:45.094513 #26531]  INFO -- Kitchen: b16814fa07c0ec2079243a16361ae76648c6b87944e79c7cd48d958c32406861
+I, [2020-04-19T18:58:45.312952 #26531]  INFO -- Kitchen: b16814fa07c0ec2079243a16361ae76648c6b87944e79c7cd48d958c32406861
+I, [2020-04-19T18:58:45.329671 #26531]  INFO -- Kitchen: -----> Test Kitchen is finished. (3m21.32s)
