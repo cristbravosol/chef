@@ -1,4 +1,0 @@
-name: ansible_initial_setup
-title: Ansible initial setup
-version: 0.0.1
-summary: This profile contains tests to check that the initial users can be accesible through SSH 

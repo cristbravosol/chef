@@ -1,7 +1,0 @@
----
-
-- hosts: "localhost"
-  gather_facts: yes
-  connection: "local"
-  roles:
-    - "ansible_initial_setup"
